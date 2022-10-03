@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            background-color: #817495;
+        }
+        .navbar{
+            width: 100%;
+            height: 4.5rem;
+            display: flex;
+            align-items: center;
+            font-family: sans-serif;
+            background-color: darkblue;
+            color: white;
+            box-shadow: 0 1rem 2rem rgb(32, 32, 32);
+            justify-content: center;
+        }
+
+        .content{
+            /* background-color: aqua; */
+            margin-top: 5rem;
+            width: 50%;
+            margin-left: 28rem;
+            display: flex;
+            font-family: sans-serif;
+            color: white;
+            padding-top: .5rem;
+            
+        }
+
+        .content label{
+            /* background-color: white; */
+            height: 1.5rem;
+            margin-top: .3rem;
+        }
+
+        .content-left{
+            /* background-color: blanchedalmond; */
+            height: 250px;
+            margin-right: 2rem;
+            display: flex;
+            flex-direction: column;
+            
+        }
+
+        .content-left input{
+            border-radius: 5px;
+            height: 2rem;
+            width: 18rem;
+            /* margin-top: .5rem; */
+
+        }
+
+        .content-right{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-right input{
+            border-radius: 5px;
+            height: 2rem;
+            width: 18rem;
+        }
+
+        #table{
+            border: white;
+            margin: auto;
+            margin-top: 2rem;
+        }
+
+        #button:hover{
+            cursor: pointer;
+            
+        }
+
+       
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <h1>Student Registration</h1>
+        </div>
+        <div class="content">
+            <div class="content-left">
+                <label for="username">Username :</label>
+                <input type="text" id="username" placeholder="username">
+
+                <label for="gender">Gender :</label>
+                <input type="text" id="gender" placeholder="Gender">
+
+                <label for="email">Email :</label>
+                <input type="email" id="email" placeholder="Email">
+
+                <label for="phone">Mobile Phone :</label>
+                <input type="number" id="phone" placeholder="Your phone number">
+            </div>
+            <div class="content-right">
+                <label for="dob">Date of birth :</label>
+                <input type="date" id="dob">
+
+                <label for="address">Address :</label>
+                <input type="text" id="address">
+
+                <label for="major">Major :</label>
+                <input type="text" id="major">
+                
+            </div>
+        </div>
+
+        <!-- Button Add -->
+
+        <Button style="width: 5rem; height: 2.5rem; display: flex; align-items: center; 
+        padding-left: 1.5rem; margin: auto; background-color: darkblue; border: none; 
+        border-radius: 1rem; color: white; margin-top: 2rem;" id="button" onclick="addData()">Add</Button>
+
+        <!-- Table  -->
+
+        <table id="table" border="1">
+            <tr style="color: white; font-weight: 10; font-family: sans-serif; ">
+                <th>Username</th>
+                <th>DOB</th>
+                <th>Sex</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Major</th>
+                <th>Action</th>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+
+        // Declare Variable
+        let username = document.getElementById("username");
+        let gender = document.getElementById("gender");
+        let email = document.getElementById("email");
+        let mobilephone = document.getElementById("phone");
+        let dob = document.getElementById("dob");
+        let address = document.getElementById("address");
+        let major = document.getElementById("major");
+        let table = document.getElementById("table");
+        let button = document.querySelector("button")
+
+        let _row = null;
+        
+        // AddData 
+        
+        function addData(){
+            if(button.innerHTML=="Add"){
+                if(confirm("Please input your information!!")){
+                    let row = table.insertRow();
+                    let cell1 = row.insertCell();
+                    let cell2 = row.insertCell();
+                    let cell3 = row.insertCell();
+                    let cell4 = row.insertCell();
+                    let cell5 = row.insertCell();
+                    let cell6 = row.insertCell();
+                    let cell7 = row.insertCell();
+                    let cell8 = row.insertCell();
+                    
+                    cell1.innerHTML = username.value
+                    cell2.innerHTML = dob.value
+                    cell3.innerHTML = gender.value
+                    cell4.innerHTML = email.value
+                    cell5.innerHTML = address.value
+                    cell6.innerHTML = mobilephone.value
+                    cell7.innerHTML = major.value
+                    cell8.innerHTML = "<span onclick = 'Update(this)'>Update</span> <span onclick = 'Delete(this)'>| Delete</span>"
+    
+                }
+
+            }
+            else{
+                _row.cells[0].innerHTML = username.value;
+                _row.cells[1].innerHTML = dob.value;
+                _row.cells[2].innerHTML = gender.value;
+                _row.cells[3].innerHTML = email.value;
+                _row.cells[4].innerHTML = address.value;
+                _row.cells[5].innerHTML = mobilephone.value;
+                _row.cells[6].innerHTML = major.value;
+                button.innerHTML = "Add";
+
+            }
+
+            clear();
+            
+            
+        }
+
+        // Clear all Data when you input
+
+        function clear(){
+            username.value = null;
+            gender.value = null;
+            email.value = null;
+            mobilephone.value = null;
+            dob.value = null;
+            address.value = null;
+            major.value = null;
+            username.focus();
+
+        }
+
+        // Delete your information
+
+        function Delete(e){
+           _row = e.parentElement.parentElement;
+           if(confirm("Do you wnat to delete?")){
+            _row.remove();
+           }
+
+        }
+
+        // Update your information
+        function Update(e){
+            _row = e.parentElement.parentElement;
+            username.value = _row.cells[0].innerHTML;
+            gender.value = _row.cells[1].innerHTML;
+            email.value = _row.cells[2].innerHTML;
+            mobilephone.value = _row.cells[3].innerHTML;
+            dob.value = _row.cells[4].innerHTML;
+            address.value = _row.cells[5].innerHTML;
+            major.value = _row.cells[6].innerHTML;
+            button.innerHTML = "Update";
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>
